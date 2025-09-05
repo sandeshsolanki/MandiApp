@@ -1,0 +1,1 @@
+A mandi tracker app where mandi people daily calculate there profit and add daily trasactions, this website build with the help of java and spring boot, and also use of thymleaf for the user interface
