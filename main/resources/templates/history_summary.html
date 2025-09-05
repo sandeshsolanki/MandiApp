@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Summary for [[${selectedDate}]]</title>
+</head>
+<body>
+<h2>Summary for <span th:text="${selectedDate}"></span></h2>
+
+<table border="1">
+  <tr>
+    <th>Farmer Name</th>
+    <th>Village</th>
+    <th>Grain</th>
+    <th>Weight</th>
+    <th>Rate</th>
+    <th>Commission</th>
+  </tr>
+  <tr th:each="entry : ${entries}">
+    <td th:text="${entry.farmerName}"></td>
+    <td th:text="${entry.villageName}"></td>
+    <td th:text="${entry.grainType}"></td>
+    <td th:text="${entry.weight}"></td>
+    <td th:text="${entry.ratePerKg}"></td>
+    <td th:text="${entry.commissionAmount}"></td>
+  </tr>
+</table>
+
+<p>Total Commission: <span th:text="${totalCommission}"></span></p>
+<a href="/history">← Back to Dates</a>
+</body>
+</html>
+tml>

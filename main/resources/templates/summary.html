@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daily Summary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #4CAF50; color: white; }
+        body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<h2>Daily Summary</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Farmer Name</th>
+        <th>Village</th>
+        <th>Grain</th>
+        <th>Weight (kg)</th>
+        <th>Rate/Unit</th>
+        <th>Total Amount</th>
+        <th>Commission</th>
+        <th>Action</th> <!-- New Column -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${entries}" th:class="${entry.paid} ? 'paid-row' : ''">
+        <td th:text="${entry.farmerName}"></td>
+        <td th:text="${entry.villageName}"></td>
+        <td th:text="${entry.grainType}"></td>
+        <td th:text="${entry.weight}"></td>
+        <td th:text="${entry.ratePerKg}"></td>
+        <td th:text="${entry.totalAmount}"></td>
+        <td th:text="${entry.commissionAmount}"></td>
+
+        <td>
+            <form th:action="@{'/paid/' + ${entry.id}}" method="post">
+                <button type="submit" th:if="!${entry.paid}">Paid</button>
+            </form>
+        </td>
+
+        <td>
+            <form th:action="@{'/delete/' + ${entry.id}}" method="post" onsubmit="return confirm('Delete this entry?')">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h3>Total Commission: ₹<span th:text="${totalCommission}">0</span></h3>
+<h3>Grand Total Amount: ₹<span th:text="${totalAmount}">0</span></h3> <!-- NEW -->
+
+
+<h3>Total Commission: ₹ <span th:text="${totalCommission}"></span></h3>
+<style>
+    .paid-row td {
+        text-decoration: line-through;
+        color: gray;
+    }
+</style>
+</body>
+</html>

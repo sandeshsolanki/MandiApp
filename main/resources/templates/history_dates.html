@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>History - Dates</title>
+</head>
+<body>
+<h2>History - Past 1 Month</h2>
+<ul>
+    <li th:each="date : ${dates}">
+        <a th:href="@{|/history/${date}|}" th:text="${date}"></a>
+    </li>
+</ul>
+
+<h2>History - Select a Date</h2>
+<ul>
+    <li th:each="d : ${dates}">
+        <a th:href="@{/history/{date}(date=${d})}" th:text="${d}"></a>
+    </li>
+</ul>
+
+<a href="/" style="text-decoration: none;">← Back to Entry</a>
+</body>
+</html>
